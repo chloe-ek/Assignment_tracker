@@ -32,11 +32,12 @@ import androidx.compose.material3.TextFieldDefaults
 
 @Composable
 fun AddScreen(navController: NavController,
-              onSave: (title: String, course: String, dueDate: String, courseLevel: Int) -> Unit ) {
+              onSave: (title: String, course: String, dueDate: String, courseLevel: Int, note: String) -> Unit ) {
     var title by remember { mutableStateOf("") }
     var course by remember { mutableStateOf("") }
     var dueDate by remember { mutableStateOf("") }
     var courseLevel by remember { mutableIntStateOf(3) }
+    var note by remember { mutableStateOf("")}
 
 
     Column(
@@ -99,16 +100,23 @@ fun AddScreen(navController: NavController,
                     }
                 }
 
+                TextField(
+                    value = note,
+                    onValueChange = { note = it },
+                    label = { Text("Note") },
+                    modifier = Modifier.fillMaxWidth()
+                )
+
                 Spacer(modifier = Modifier.height(24.dp))
 
                 Button(
                     onClick = {
-                        onSave(title, course, dueDate, courseLevel)
+                        onSave(title, course, dueDate, courseLevel, note)
                         navController.navigate("home")
                     },
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFFffc2d1),   // 버튼 배경색 (핑크톤 예시)
-                        contentColor = Color.White            // 버튼 안 텍스트 색
+                        containerColor = Color(0xFFffc2d1),
+                        contentColor = Color.White
                     ),
                     modifier = Modifier.align(Alignment.End)
                 ) {

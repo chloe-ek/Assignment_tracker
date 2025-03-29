@@ -67,13 +67,14 @@ fun MainContent() {
                 CompletedScreen(navController, repo)
             }
             composable("add") {
-                AddScreen(navController) { title, course, dueDate, courseLevel ->
+                AddScreen(navController) { title, course, dueDate, courseLevel, note ->
                     coroutineScope.launch {
                         val newAssignment = Assignment(
                             title = title,
                             course = course,
                             courseLevel = courseLevel,
-                            deadline = dueDate
+                            deadline = dueDate,
+                            note = note
                         )
                         repo.addAssignment(newAssignment)
                         assignments.clear()

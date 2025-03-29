@@ -1,5 +1,6 @@
 package com.bcit.assignmenttracker.component
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -33,15 +34,20 @@ fun AssignmentCard(
     courseLevel: Int,
     dueDate: String,
     onEditClick: () -> Unit,
-    onCompleteClick: () -> Unit
+    onCompleteClick: () -> Unit,
+    isCompleted: Boolean = false
 ) {
+
+    val backgroundColor = if (isCompleted) Color(0xFFF5F5F5) else Color(0xFFFEF9D9)
+
     ElevatedCard(
         modifier = Modifier
-            .fillMaxWidth().
-            padding(vertical = 10.dp, horizontal = 10.dp),
+            .fillMaxWidth()
+            .padding(vertical = 10.dp, horizontal = 10.dp)
+            ,
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
                 colors = CardDefaults.elevatedCardColors(
-                containerColor = Color(0xFFFEF9D9)
+                containerColor = backgroundColor
                 )
     )
     {
@@ -52,8 +58,10 @@ fun AssignmentCard(
                 horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                 Text(text = title, style = MaterialTheme.typography.titleMedium)
-                IconButton(onClick = onEditClick) {
-                    Icon(Icons.Default.Edit, contentDescription = null)
+                if (!isCompleted) {
+                    IconButton(onClick = onEditClick) {
+                        Icon(Icons.Default.Edit, contentDescription = null)
+                    }
                 }
             }
 
@@ -76,11 +84,13 @@ fun AssignmentCard(
                     )
                 } }
 
-                Button(
-                    onClick = onCompleteClick,
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFfde2e4))
-                ) {
-                    Text("Complete")
+                if (!isCompleted) {
+                    Button(
+                        onClick = onCompleteClick,
+                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFfde2e4))
+                    ) {
+                        Text("Complete")
+                    }
                 }
 
 

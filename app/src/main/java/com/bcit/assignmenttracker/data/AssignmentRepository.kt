@@ -10,6 +10,11 @@ class AssignmentRepository(private val assignmentDao: AssignmentDao) {
         return assignmentDao.getCompletedAssignments()
     }
 
+    suspend fun getAllAssignments(): List<Assignment> {
+        return assignmentDao.getAllAssignments()
+    }
+
+
     suspend fun addAssignment(assignment: Assignment){
         assignmentDao.addAssignment(assignment)
     }

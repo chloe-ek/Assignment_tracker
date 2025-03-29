@@ -10,5 +10,6 @@ data class Assignment (
     val course: String,
     val deadline: String,
     val courseLevel: Int,
-    val isCompleted: Boolean = false
+    val isCompleted: Boolean = false,
+    val note: String = ""
 )

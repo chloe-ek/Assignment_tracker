@@ -2,6 +2,7 @@ package com.bcit.assignmenttracker
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -32,17 +33,11 @@ fun HomeScreen(
     val inCompleteAssignments = assignments.filter { !it.isCompleted }
 
     Column(modifier = Modifier.padding(16.dp)) {
-        Button(
-            onClick = { navController.navigate("completed") },
-            modifier = Modifier.align(Alignment.End),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFdde5b6))
-        ) {
-            Text("Completed")
-        }
+
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        LazyColumn(modifier = Modifier.padding(16.dp)) {
+        LazyColumn(modifier = Modifier.padding(16.dp).weight(1f)) {
             items(inCompleteAssignments) { assignment ->
                 AssignmentCard(
                     title = assignment.title,
@@ -55,7 +50,7 @@ fun HomeScreen(
                             val updated = assignment.copy(isCompleted = true)
                             repo.updateAssignment(updated)
                             assignments.clear()
-                            assignments.addAll(repo.getCompletedAssignments())
+                            assignments.addAll(repo.getAllAssignments())
 
                         }
                     }
@@ -63,6 +58,14 @@ fun HomeScreen(
 
                 )
             }
+        }
+        Button(
+            onClick = { navController.navigate("completed") },
+            modifier = Modifier
+                .align(Alignment.End),
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFdde5b6))
+        ) {
+            Text("Completed")
         }
     }
 }
