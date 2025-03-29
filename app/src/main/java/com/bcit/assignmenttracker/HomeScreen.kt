@@ -2,6 +2,7 @@ package com.bcit.assignmenttracker
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -32,18 +33,19 @@ fun HomeScreen(
 ) {
     val inCompleteAssignments = assignments.filter { !it.isCompleted }
 
-    Column(modifier = Modifier.padding(16.dp)) {
+    Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
 
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        LazyColumn(modifier = Modifier.padding(16.dp).weight(1f)) {
+        LazyColumn(modifier = Modifier.weight(1f).fillMaxWidth()) {
             items(inCompleteAssignments) { assignment ->
                 AssignmentCard(
                     title = assignment.title,
                     course = assignment.course,
                     courseLevel = assignment.courseLevel,
                     dueDate = assignment.deadline,
+                    note = assignment.note,
                     onEditClick = {},
                     onCompleteClick = {
                         coroutineScope.launch {

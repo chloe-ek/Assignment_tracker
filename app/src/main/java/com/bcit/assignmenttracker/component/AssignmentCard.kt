@@ -4,14 +4,11 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Star
-import androidx.compose.material3.AlertDialogDefaults.containerColor
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CardDefaults
@@ -21,10 +18,14 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.runtime.*
+import androidx.compose.ui.text.font.FontWeight
 
 
 @Composable
@@ -33,6 +34,7 @@ fun AssignmentCard(
     course: String,
     courseLevel: Int,
     dueDate: String,
+    note: String,
     onEditClick: () -> Unit,
     onCompleteClick: () -> Unit,
     isCompleted: Boolean = false
@@ -40,10 +42,13 @@ fun AssignmentCard(
 
     val backgroundColor = if (isCompleted) Color(0xFFF5F5F5) else Color(0xFFFEF9D9)
 
+    var showNote by remember { mutableStateOf(false) }
+
     ElevatedCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 10.dp, horizontal = 10.dp)
+            .clickable{ showNote = !showNote} // toggle
             ,
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
                 colors = CardDefaults.elevatedCardColors(
@@ -92,7 +97,11 @@ fun AssignmentCard(
                         Text("Complete")
                     }
                 }
+            }
 
+            if (showNote) {
+                Text(text = "Note:", fontWeight = FontWeight.SemiBold)
+                Text(text = if (note.isNotBlank()) note else "")
 
             }
         }

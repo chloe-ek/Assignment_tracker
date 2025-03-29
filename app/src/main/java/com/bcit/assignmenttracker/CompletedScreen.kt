@@ -36,6 +36,7 @@ fun CompletedScreen (
                 course = assignment.course,
                 courseLevel = assignment.courseLevel,
                 dueDate = assignment.deadline,
+                note = assignment.note,
                 onEditClick = {},
                 onCompleteClick = {},
                 isCompleted = true
