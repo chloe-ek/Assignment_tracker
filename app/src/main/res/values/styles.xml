@@ -1,0 +1,7 @@
+<resources>
+    <style name="MyPastelDatePicker" parent="Theme.MaterialComponents.DayNight.Dialog">
+        <item name="android:windowBackground">@color/pastel_pink</item>
+        <item name="colorPrimary">#8EACCD</item>
+        <item name="colorAccent">#8EACCD</item>
+    </style>
+</resources>

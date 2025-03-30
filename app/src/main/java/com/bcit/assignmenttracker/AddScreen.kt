@@ -1,8 +1,7 @@
 package com.bcit.assignmenttracker
 
-import androidx.compose.material3.Icon
+import androidx.compose.material3.*
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -16,17 +15,19 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ElevatedCard
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.bcit.assignmenttracker.data.Assignment
+import android.app.DatePickerDialog
+import java.text.SimpleDateFormat
+import java.util.*
+import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Icon
+
 
 
 @Composable
@@ -39,7 +40,25 @@ fun AddScreen(navController: NavController,
     var courseLevel by remember { mutableIntStateOf(existing?.courseLevel ?: 3) }
     var note by remember { mutableStateOf(existing?.note ?: "") }
 
+    val context = LocalContext.current
+    val calendar = Calendar.getInstance()
 
+    val datePickerDialog = remember {
+        DatePickerDialog(
+            context,
+            R.style.MyPastelDatePicker,
+            { _, year, month, day ->
+                val selectedDate = Calendar.getInstance().apply {
+                    set(year, month, day)
+                }
+                val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                dueDate = formatter.format(selectedDate.time)
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+    }
 
     Column(
         modifier = Modifier
@@ -79,11 +98,17 @@ fun AddScreen(navController: NavController,
 
                 Spacer(modifier = Modifier.height(23.dp))
 
-                TextField(
+                OutlinedTextField(
                     value = dueDate,
-                    onValueChange = { dueDate = it },
+                    onValueChange = {},
                     label = { Text("Due Date") },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    readOnly = true,
+                    trailingIcon = {
+                        IconButton(onClick = { datePickerDialog.show() }) {
+                            Icon(Icons.Default.DateRange, contentDescription = "Pick Date")
+                        }
+                    }
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
