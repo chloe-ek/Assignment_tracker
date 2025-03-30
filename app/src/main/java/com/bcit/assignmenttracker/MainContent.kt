@@ -1,5 +1,6 @@
 package com.bcit.assignmenttracker
 
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -56,7 +57,7 @@ fun MainContent() {
                 HomeScreen(navController, assignments, repo, coroutineScope)
             }
             composable("upcoming") {
-                UpcomingScreen(navController)
+                UpcomingScreen(navController, repo)
             }
             composable("courseBy") {
                 CourseByScreen(navController)

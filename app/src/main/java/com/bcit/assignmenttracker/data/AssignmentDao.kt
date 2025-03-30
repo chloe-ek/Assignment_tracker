@@ -17,11 +17,8 @@ interface AssignmentDao {
     @Query("SELECT * FROM assignment ORDER BY deadline ASC")
     suspend fun getAllAssignments(): List<Assignment>
 
-    @Query("SELECT * FROM assignment WHERE deadline = :today")
-    suspend fun getTodayAssignments(today: String): List<Assignment>
-
-    @Query("SELECT * FROM assignment WHERE course = :courseName")
-    suspend fun getAssignmentByCourse(courseName: String): List<Assignment>
+    @Query("SELECT * FROM assignment WHERE deadline IN (:dates) AND isCompleted = 0 ORDER BY deadline ASC")
+    suspend fun getUpcomingAssignments(dates: List<String>): List<Assignment>
 
     @Insert
     suspend fun addAssignment(assignment: Assignment)

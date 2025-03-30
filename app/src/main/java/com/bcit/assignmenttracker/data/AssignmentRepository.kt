@@ -1,5 +1,8 @@
 package com.bcit.assignmenttracker.data
 
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+
 class AssignmentRepository(private val assignmentDao: AssignmentDao) {
 
     suspend fun getActiveAssignments(): List<Assignment> {
@@ -27,12 +30,8 @@ class AssignmentRepository(private val assignmentDao: AssignmentDao) {
         assignmentDao.updateAssignment(assignment)
     }
 
-    suspend fun getTodayAssignments(today: String): List<Assignment> {
-        return assignmentDao.getTodayAssignments(today)
-    }
-
-    suspend fun getAssignmentByCourse(courseName: String): List<Assignment> {
-        return assignmentDao.getAssignmentByCourse(courseName)
+    suspend fun getUpcomingAssignments(dates: List<String>): List<Assignment> {
+        return assignmentDao.getUpcomingAssignments(dates)
     }
 
 }
