@@ -18,7 +18,6 @@ import androidx.navigation.compose.composable
 import com.bcit.assignmenttracker.data.Assignment
 import com.bcit.assignmenttracker.data.AssignmentRepository
 import com.bcit.assignmenttracker.data.MyDatabase
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 
@@ -67,22 +66,44 @@ fun MainContent() {
                 CompletedScreen(navController, repo)
             }
             composable("add") {
-                AddScreen(navController) { title, course, dueDate, courseLevel, note ->
-                    coroutineScope.launch {
-                        val newAssignment = Assignment(
-                            title = title,
-                            course = course,
-                            courseLevel = courseLevel,
-                            deadline = dueDate,
-                            note = note
-                        )
-                        repo.addAssignment(newAssignment)
-                        assignments.clear()
-                        assignments.addAll(repo.getActiveAssignments())
-                    }
+                AddScreen(
+                    navController = navController,
+                    onSave = { assignment ->
+                        coroutineScope.launch {
+                            if (assignment.id == 0) {
+                                repo.addAssignment(assignment)
+                            } else {
+                                repo.updateAssignment(assignment)
 
-                    navController.navigate("home")
+                            }
+                            assignments.clear()
+                            assignments.addAll(repo.getActiveAssignments())
+                            navController.navigate("home")
+                        }
+                    },
+                    existing = null
+                )
+            }
+
+            composable("edit/{id}") { backStackEntry ->
+                val id = backStackEntry.arguments?.getString("id")?.toIntOrNull()
+                val assignment = assignments.find { it.id == id }
+
+                assignment?.let {
+                    AddScreen(
+                        navController = navController,
+                        existing = it,
+                        onSave = { updated ->
+                            coroutineScope.launch {
+                                repo.updateAssignment(updated)
+                                assignments.clear()
+                                assignments.addAll(repo.getAllAssignments())
+                                navController.navigate("home")
+                            }
+                        }
+                    )
                 }
+
             }
 
         }

@@ -26,18 +26,19 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.compose.material3.TextFieldDefaults
-
+import com.bcit.assignmenttracker.data.Assignment
 
 
 @Composable
 fun AddScreen(navController: NavController,
-              onSave: (title: String, course: String, dueDate: String, courseLevel: Int, note: String) -> Unit ) {
-    var title by remember { mutableStateOf("") }
-    var course by remember { mutableStateOf("") }
-    var dueDate by remember { mutableStateOf("") }
-    var courseLevel by remember { mutableIntStateOf(3) }
-    var note by remember { mutableStateOf("")}
+              onSave: (Assignment) -> Unit,
+              existing: Assignment? = null) {
+    var title by remember { mutableStateOf(existing?.title ?: "") }
+    var course by remember { mutableStateOf(existing?.course ?: "") }
+    var dueDate by remember { mutableStateOf(existing?.deadline ?: "") }
+    var courseLevel by remember { mutableIntStateOf(existing?.courseLevel ?: 3) }
+    var note by remember { mutableStateOf(existing?.note ?: "") }
+
 
 
     Column(
@@ -111,9 +112,19 @@ fun AddScreen(navController: NavController,
 
                 Button(
                     onClick = {
-                        onSave(title, course, dueDate, courseLevel, note)
+                        onSave(
+                            Assignment(
+                                id = existing?.id ?:0,
+                                title = title,
+                                course = course,
+                                deadline = dueDate,
+                                courseLevel = courseLevel,
+                                note = note)
+                        )
                         navController.navigate("home")
                     },
+
+
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color(0xFFffc2d1),
                         contentColor = Color.White
@@ -121,7 +132,6 @@ fun AddScreen(navController: NavController,
                     modifier = Modifier.align(Alignment.End)
                 ) {
                     Text("Save")
-
 
                 }
             }

@@ -46,7 +46,9 @@ fun HomeScreen(
                     courseLevel = assignment.courseLevel,
                     dueDate = assignment.deadline,
                     note = assignment.note,
-                    onEditClick = {},
+                    onEditClick = {
+                        navController.navigate("edit/${assignment.id}")
+                    },
                     onCompleteClick = {
                         coroutineScope.launch {
                             val updated = assignment.copy(isCompleted = true)
