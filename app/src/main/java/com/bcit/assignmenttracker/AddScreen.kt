@@ -19,7 +19,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.bcit.assignmenttracker.data.Assignment
+import com.bcit.assignmenttracker.data.local.Assignment
 import android.app.DatePickerDialog
 import java.text.SimpleDateFormat
 import java.util.*
@@ -157,6 +157,30 @@ fun AddScreen(navController: NavController,
                     modifier = Modifier.align(Alignment.End)
                 ) {
                     Text("Save")
+
+                }
+                Button(
+                    onClick = {
+                        onSave(
+                            Assignment(
+                                id = existing?.id ?:0,
+                                title = title,
+                                course = course,
+                                deadline = dueDate,
+                                courseLevel = courseLevel,
+                                note = note)
+                        )
+                        navController.navigate("home")
+                    },
+
+
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFFffc2d1),
+                        contentColor = Color.White
+                    ),
+                    modifier = Modifier.align(Alignment.End)
+                ) {
+                    Text("Delete")
 
                 }
             }

@@ -1,4 +1,4 @@
-package com.bcit.assignmenttracker.data
+package com.bcit.assignmenttracker.data.local
 
 import androidx.room.Dao
 import androidx.room.Delete

@@ -8,11 +8,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.bcit.assignmenttracker.component.AssignmentCard
-import com.bcit.assignmenttracker.data.Assignment
+import com.bcit.assignmenttracker.data.local.Assignment
 import com.bcit.assignmenttracker.data.AssignmentRepository
 import kotlinx.coroutines.launch
-import androidx.compose.material3.Text
-import androidx.compose.material3.MaterialTheme
 
 @Composable
 fun CompletedScreen (

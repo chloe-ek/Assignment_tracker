@@ -1,9 +1,17 @@
 package com.bcit.assignmenttracker.data
 
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
+import com.bcit.assignmenttracker.data.local.Assignment
+import com.bcit.assignmenttracker.data.local.AssignmentDao
+import com.bcit.assignmenttracker.data.remote.Motivation
+import com.bcit.assignmenttracker.data.remote.MotivationRemoteSource
 
-class AssignmentRepository(private val assignmentDao: AssignmentDao) {
+class AssignmentRepository(
+    private val assignmentDao: AssignmentDao,
+    private val motivationSource: MotivationRemoteSource
+) {
+    suspend fun getMotivation(): Motivation {
+        return motivationSource.getMotivation()
+    }
 
     suspend fun getActiveAssignments(): List<Assignment> {
         return assignmentDao.getActiveAssignments()

@@ -1,6 +1,5 @@
 package com.bcit.assignmenttracker
 
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -16,9 +15,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.composable
-import com.bcit.assignmenttracker.data.Assignment
+import com.bcit.assignmenttracker.data.local.Assignment
 import com.bcit.assignmenttracker.data.AssignmentRepository
-import com.bcit.assignmenttracker.data.MyDatabase
+import com.bcit.assignmenttracker.data.local.MyDatabase
+import com.bcit.assignmenttracker.data.remote.MotivationRemoteSource
+import com.bcit.assignmenttracker.data.remote.MyHttpClient
 import kotlinx.coroutines.launch
 
 
@@ -29,7 +30,9 @@ fun MainContent() {
     val assignments = remember { mutableStateListOf<Assignment>() }
     val coroutineScope = rememberCoroutineScope()
     val db = MyDatabase.getDatabase(content)
-    val repo = AssignmentRepository(db.assignmentDao())
+    val repo = AssignmentRepository(
+        db.assignmentDao(),
+        motivationSource = MotivationRemoteSource(MyHttpClient))
 
     LaunchedEffect(Unit) {
         coroutineScope.launch {

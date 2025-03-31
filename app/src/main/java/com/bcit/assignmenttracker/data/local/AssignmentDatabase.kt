@@ -1,4 +1,4 @@
-package com.bcit.assignmenttracker.data
+package com.bcit.assignmenttracker.data.local
 
 import android.content.Context
 import androidx.room.Database

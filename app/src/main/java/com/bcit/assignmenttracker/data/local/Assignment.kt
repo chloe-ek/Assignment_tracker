@@ -1,4 +1,4 @@
-package com.bcit.assignmenttracker.data
+package com.bcit.assignmenttracker.data.local
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

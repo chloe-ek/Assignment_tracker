@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.bcit.assignmenttracker.component.AssignmentCard
-import com.bcit.assignmenttracker.data.Assignment
+import com.bcit.assignmenttracker.data.local.Assignment
 import androidx.compose.foundation.lazy.items
 import com.bcit.assignmenttracker.data.AssignmentRepository
 import kotlinx.coroutines.CoroutineScope

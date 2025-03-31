@@ -16,8 +16,7 @@ import androidx.navigation.NavController
 import com.bcit.assignmenttracker.component.AssignmentCard
 import com.bcit.assignmenttracker.data.AssignmentRepository
 import kotlinx.coroutines.launch
-import com.bcit.assignmenttracker.data.Assignment
-import kotlinx.coroutines.coroutineScope
+import com.bcit.assignmenttracker.data.local.Assignment
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
