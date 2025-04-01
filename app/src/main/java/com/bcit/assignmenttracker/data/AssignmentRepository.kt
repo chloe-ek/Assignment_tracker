@@ -25,7 +25,6 @@ class AssignmentRepository(
         return assignmentDao.getAllAssignments()
     }
 
-
     suspend fun addAssignment(assignment: Assignment){
         assignmentDao.addAssignment(assignment)
     }

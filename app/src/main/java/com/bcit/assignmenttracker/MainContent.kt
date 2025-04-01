@@ -19,7 +19,7 @@ import com.bcit.assignmenttracker.data.local.Assignment
 import com.bcit.assignmenttracker.data.AssignmentRepository
 import com.bcit.assignmenttracker.data.local.MyDatabase
 import com.bcit.assignmenttracker.data.remote.MotivationRemoteSource
-import com.bcit.assignmenttracker.data.remote.MyHttpClient
+import com.bcit.assignmenttracker.data.remote.client
 import kotlinx.coroutines.launch
 
 
@@ -32,7 +32,7 @@ fun MainContent() {
     val db = MyDatabase.getDatabase(content)
     val repo = AssignmentRepository(
         db.assignmentDao(),
-        motivationSource = MotivationRemoteSource(MyHttpClient))
+        motivationSource = MotivationRemoteSource(client))
 
     LaunchedEffect(Unit) {
         coroutineScope.launch {
@@ -62,8 +62,9 @@ fun MainContent() {
             composable("upcoming") {
                 UpcomingScreen(navController, repo)
             }
-            composable("courseBy") {
-                CourseByScreen(navController)
+
+            composable("motivation") {
+                MotivationScreen(repo)
             }
 
             composable("Completed") {
@@ -123,6 +124,7 @@ fun getTitle(navController: NavController): String {
         "upcoming" -> "Upcoming"
         "courseBy" -> "Course By"
         "add" -> "Add"
+        "motivation" -> "Quotes"
         else -> "Assignments"
     }
 }

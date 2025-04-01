@@ -1,6 +1,8 @@
 package com.bcit.assignmenttracker.data.remote
 
+import com.google.gson.annotations.SerializedName
+
 data class Motivation (
-    val content: String,
-    val author: String
+    @SerializedName("q") val q: String,
+    @SerializedName("a") val a: String
 )

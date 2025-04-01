@@ -2,13 +2,11 @@ package com.bcit.assignmenttracker
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.MailOutline
 import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
@@ -24,7 +22,7 @@ fun MyBottomNav(navController: NavController){
     val navItems = listOf(
         NavItem(Icons.Default.Home, "home"),
         NavItem(Icons.Default.Notifications, "upcoming"),
-        NavItem(Icons.Default.Menu, "courseBy")
+        NavItem(Icons.Default.MailOutline, "motivation")
     )
 
     NavigationBar(
