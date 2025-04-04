@@ -6,7 +6,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.bcit.assignmenttracker.component.AssignmentCard
 import com.bcit.assignmenttracker.data.local.Assignment
 import com.bcit.assignmenttracker.data.AssignmentRepository
@@ -14,7 +13,6 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun CompletedScreen (
-    navController: NavController,
     repo: AssignmentRepository
 ) {
     val completedAssignments = remember { mutableStateListOf<Assignment>() }

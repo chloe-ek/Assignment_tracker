@@ -60,7 +60,7 @@ fun MainContent() {
                 HomeScreen(navController, assignments, repo, coroutineScope)
             }
             composable("upcoming") {
-                UpcomingScreen(navController, repo)
+                UpcomingScreen(repo)
             }
 
             composable("motivation") {
@@ -68,7 +68,7 @@ fun MainContent() {
             }
 
             composable("Completed") {
-                CompletedScreen(navController, repo)
+                CompletedScreen(repo)
             }
             composable("add") {
                 AddScreen(

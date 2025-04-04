@@ -12,7 +12,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.bcit.assignmenttracker.component.AssignmentCard
 import com.bcit.assignmenttracker.data.AssignmentRepository
 import kotlinx.coroutines.launch
@@ -27,7 +26,7 @@ private fun getDateAfter(days: Int): String {
 }
 
 @Composable
-fun UpcomingScreen(navController: NavController, repo: AssignmentRepository) {
+fun UpcomingScreen(repo: AssignmentRepository) {
     val assignments = remember { mutableStateListOf<Assignment>()}
     val scope = rememberCoroutineScope()
 
