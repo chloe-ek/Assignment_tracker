@@ -33,6 +33,7 @@ import androidx.compose.material3.Icon
 @Composable
 fun AddScreen(navController: NavController,
               onSave: (Assignment) -> Unit,
+              onDelete: (Assignment) -> Unit,
               existing: Assignment? = null) {
     var title by remember { mutableStateOf(existing?.title ?: "") }
     var course by remember { mutableStateOf(existing?.course ?: "") }
@@ -159,17 +160,10 @@ fun AddScreen(navController: NavController,
                     Text("Save")
 
                 }
+                if (existing != null) {
                 Button(
                     onClick = {
-                        onSave(
-                            Assignment(
-                                id = existing?.id ?:0,
-                                title = title,
-                                course = course,
-                                deadline = dueDate,
-                                courseLevel = courseLevel,
-                                note = note)
-                        )
+                        onDelete(existing)
                         navController.navigate("home")
                     },
 
@@ -182,6 +176,7 @@ fun AddScreen(navController: NavController,
                 ) {
                     Text("Delete")
 
+                }
                 }
             }
         }

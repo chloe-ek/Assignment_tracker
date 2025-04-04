@@ -86,6 +86,7 @@ fun MainContent() {
                             navController.navigate("home")
                         }
                     },
+                    onDelete = {},
                     existing = null
                 )
             }
@@ -105,16 +106,22 @@ fun MainContent() {
                                 assignments.addAll(repo.getAllAssignments())
                                 navController.navigate("home")
                             }
+                        },
+                        onDelete = { deleted ->
+                            coroutineScope.launch {
+                                repo.deleteAssignment(deleted)
+                                assignments.clear()
+                                assignments.addAll(repo.getAllAssignments())
+                                navController.navigate("home")
+                            }
                         }
                     )
                 }
-
             }
-
         }
     }
-
 }
+
 
 @Composable
 fun getTitle(navController: NavController): String {
