@@ -3,6 +3,9 @@
 A clean, mobile-first Android app built with **Jetpack Compose** and **Room** 
 to help students manage and track their assignments with ease.
 
+![AssignmentTracker](https://github.com/user-attachments/assets/27421a25-19d9-41b1-9c7e-3d023a8e2739)
+
+
 ## ✨ Features
 
 - 📝 **Add/Edit Assignments**  
